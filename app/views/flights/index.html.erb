@@ -4,12 +4,35 @@
 	<%= hidden_field_tag :search %>
 
 	<%= label_tag "From:" %>
-	<%= select_tag :from, options_for_select(@from_airports, params[:from]) %>
+	<%= select_tag :from, options_for_select(@airport_codes, params[:from]) %>
 	<%= label_tag "To:" %>
-	<%= select_tag :to, options_for_select(@to_airports, params[:to]) %>
+	<%= select_tag :to, options_for_select(@airport_codes, params[:to]) %>
 	<%= label_tag "Passengers:" %>
 	<%= select_tag :num_passengers, options_for_select([1, 2, 3, 4] , params[:num_passengers]) %>
 	<%= label_tag "Date:" %>
 	<%= select_tag :date, options_for_select(@dates, params[:date]) %>
 	<%= submit_tag "Search" %>
 <% end %>
+
+<% unless @results.first.empty? %>
+	<h3>Search results</h3>
+	<ul>
+		<% @results.each do |r| %>
+			<%= form_tag( new_booking_path, method: :get) do %>
+				<li>
+					<%= radio_button_tag "flight_id", flight.id %>
+					<%= hidden_field_tag :num_passengers, params[:num_passengers] %>
+					<%= label_tag "From:" %>
+					<%= r.to_a.first.from_airport.code %>
+					<%= label_tag "To:" %>
+					<%= r.to_a.first.to_airport.code %>
+					<%= label_tag "Date:" %>
+					<%= r.to_a.first.date.strftime("%m/%d/%Y at %H:%M") %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+	<%= submit_tag "Choose flight" %>
+<% else %>
+	<h3>There are no matching flights</h3>
+<% end %> 
