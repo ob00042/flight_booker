@@ -15,12 +15,15 @@
 <% end %>
 
 <% unless @results.first.empty? %>
+
 	<h3>Search results</h3>
+
 	<ul>
 		<% @results.each do |r| %>
+
 			<%= form_tag( new_booking_path, method: :get) do %>
 				<li>
-					<%= radio_button_tag "flight_id", flight.id %>
+					<%= radio_button_tag "flight_id", r.to_a.first.id %>
 					<%= hidden_field_tag :num_passengers, params[:num_passengers] %>
 					<%= label_tag "From:" %>
 					<%= r.to_a.first.from_airport.code %>
@@ -29,10 +32,14 @@
 					<%= label_tag "Date:" %>
 					<%= r.to_a.first.date.strftime("%m/%d/%Y at %H:%M") %>
 				</li>
+				<%= submit_tag "Choose flight" %>
 			<% end %>
+
 		<% end %>
-	</ul>
-	<%= submit_tag "Choose flight" %>
+	</ul>	
+
 <% else %>
+
 	<h3>There are no matching flights</h3>
+
 <% end %> 
