@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<h1>Your purchase is complete</h1>
+	<p>Passenger information: Name: <%= @user.name %></p>
+	<p>Booking information: Flight ID: <%= @booking.flight_id %></p>
+	<p>Flight information: </p>
+	<ul>
+		<li>From: <%= @flight.from_airport.code %></li>
+		<li>To: <%= @flight.to_airport.code %></li>
+		<li>Date: <%= @flight.date %></li>
+		<li>Duration: <%= @flight.duration %></li>
+	</ul>
+	<p>Thank you, have a great journey!</p>
+</body>
+</html>

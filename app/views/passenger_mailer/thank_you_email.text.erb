@@ -1,0 +1,13 @@
+Your purchase is complete.
+
+Passenger information: Name: <%= @user.name %>
+
+Booking information: Flight ID: <%= @booking.flight_id %>
+Flight information:
+
+	From: <%= @flight.from_airport.code %>
+	To: <%= @flight.to_airport.code %>
+	Date: <%= @flight.date %>
+	Duration: <%= @flight.duration %>
+
+Thank you, have a great journey!
